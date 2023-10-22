@@ -8,7 +8,7 @@ export const Header = () => (
       border: "2px solid black",
       borderRadius: 2,
       textAlign: "center",
-      mb: 3,
+      mb: 2,
     }}
   >
     <Typography variant="h5" fontWeight="bold" color="text.primary">

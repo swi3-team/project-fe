@@ -10,7 +10,7 @@ export const Content = () => (
       <Route path="/" element={<Layout />}>
         <Route index element={<CarList />} />
         <Route path="add" element={<CarAdd />} />
-        <Route path="update" element={<CardUpdate />} />
+        <Route path="update/:id" element={<CardUpdate />} />
       </Route>
     </Routes>
   </BrowserRouter>

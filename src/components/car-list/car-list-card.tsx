@@ -16,18 +16,26 @@ import {
 import { Car } from "../../types";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CarCrashIcon from '@mui/icons-material/CarCrash';
-import PropaneTankIcon from '@mui/icons-material/PropaneTank';
-import PersonIcon from '@mui/icons-material/Person';
-import TodayIcon from '@mui/icons-material/Today';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import CarCrashIcon from "@mui/icons-material/CarCrash";
+import PropaneTankIcon from "@mui/icons-material/PropaneTank";
+import PersonIcon from "@mui/icons-material/Person";
+import TodayIcon from "@mui/icons-material/Today";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import { useNavigate, generatePath } from "react-router-dom";
 
 interface Props {
   car: Car;
 }
 
 export const CarListCard = ({ car }: Props) => {
-  const { name, image_url, brand, owner, type, engine, year_made } = car;
+  const { id, name, image_url, brand, owner, type, engine, year_made } = car;
+
+  const navigate = useNavigate();
+
+  const handleDetailClick = () =>
+    navigate(generatePath("/update/:id", { id: String(id) }));
+
+  const handleDeleteClick = () => console.log("TODO: delete car"); // TODO: implement delete car
 
   return (
     <Card>
@@ -65,7 +73,10 @@ export const CarListCard = ({ car }: Props) => {
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="owner" secondary={`${owner.name} ${owner.surname}`} />
+            <ListItemText
+              primary="owner"
+              secondary={`${owner.name} ${owner.surname}`}
+            />
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -99,12 +110,14 @@ export const CarListCard = ({ car }: Props) => {
           <Button
             aria-label="update"
             variant="outlined"
+            onClick={handleDetailClick}
             startIcon={<EditIcon />}
           >
             Update
           </Button>
           <Button
             aria-label="delete"
+            onClick={handleDeleteClick}
             variant="outlined"
             startIcon={<DeleteIcon />}
           >
