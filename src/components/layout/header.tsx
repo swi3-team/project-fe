@@ -8,9 +8,10 @@ export const Header = () => (
       border: "2px solid black",
       borderRadius: 2,
       textAlign: "center",
+      mb: 3,
     }}
   >
-    <Typography variant="h5" fontWeight="bold">
+    <Typography variant="h5" fontWeight="bold" color="text.primary">
       Cars administration
     </Typography>
   </Stack>

@@ -1,13 +1,11 @@
-import { Container } from "@mui/material";
-import { Header } from "./components";
-import { Content } from "./components/content";
+import { ThemeProvider } from "@emotion/react";
+import { Content } from "./components/layout/content";
+import { theme } from "./theme";
 
 export const App = () => (
-  <Container>
-    <Header />
-
+  <ThemeProvider theme={theme}>
     <Content />
-  </Container>
+  </ThemeProvider>
 );
 
 export default App;
