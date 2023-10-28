@@ -12,7 +12,7 @@ export const Header = () => (
     }}
   >
     <Typography variant="h5" fontWeight="bold" color="text.primary">
-      Cars administration
+      Cars admin
     </Typography>
   </Stack>
 );
