@@ -5,7 +5,7 @@ export const Header = () => (
     sx={{
       bgcolor: "background.default",
       p: 2,
-      border: "2px solid black",
+      border: "2px solid #000",
       borderRadius: 2,
       textAlign: "center",
       mb: 2,
