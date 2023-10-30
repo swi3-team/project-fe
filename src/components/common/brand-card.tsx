@@ -1,12 +1,7 @@
 import React from "react"
-import { FormInput, FormInputBrandEnum } from "../../types"
+import { FormInput, FormInputAddCardBrand } from "../../types"
 import { UseFormRegister } from "react-hook-form"
 import { Stack, TextField, Box, Button } from "@mui/material"
-
-// interface FormInput {
-//   brand_name: string
-//   brand_country: string
-// }
 
 type Props = {
   formProgress: number
@@ -15,12 +10,9 @@ type Props = {
 }
 
 export const BrandCard = ({ formProgress, setFormProgress, register }: Props) => {
-  // const { register } = useForm<FormInput>()
-
   const handleSubmit = (type: number) => (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setFormProgress(3)
-    console.log("setting form progress to: ", type)
+    setFormProgress(type)
   }
 
   const buttonPrevState = () => {
@@ -45,11 +37,11 @@ export const BrandCard = ({ formProgress, setFormProgress, register }: Props) =>
       <Stack direction='column' gap={3}>
         <TextField
           required
-          id={`${FormInputBrandEnum.brand_name}`}
+          id={`${FormInputAddCardBrand.brand_name}`}
           label='Brand name'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputBrandEnum.brand_name}`, {
+          {...register(`${FormInputAddCardBrand.brand_name}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,
@@ -57,11 +49,11 @@ export const BrandCard = ({ formProgress, setFormProgress, register }: Props) =>
         />
         <TextField
           required
-          id={`${FormInputBrandEnum.brand_country}`}
+          id={`${FormInputAddCardBrand.brand_country}`}
           label='Brand country'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputBrandEnum.brand_country}`, {
+          {...register(`${FormInputAddCardBrand.brand_country}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,

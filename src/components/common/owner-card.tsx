@@ -1,5 +1,5 @@
 import React from "react"
-import { FormInput, FormInputOwnerEnum } from "../../types"
+import { FormInput, FormInputAddCardOwner } from "../../types"
 import { UseFormRegister } from "react-hook-form"
 import { Box, Stack, TextField, Button } from "@mui/material"
 
@@ -12,8 +12,7 @@ type Props = {
 export const OwnerCard = ({ formProgress, setFormProgress, register }: Props) => {
   const handleSubmit = (type: number) => (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setFormProgress(2)
-    console.log("setting form progress to: ", type)
+    setFormProgress(type)
   }
 
   return (
@@ -36,11 +35,11 @@ export const OwnerCard = ({ formProgress, setFormProgress, register }: Props) =>
       <Stack direction='column' gap={3}>
         <TextField
           required
-          id={`${FormInputOwnerEnum.owner_name}`}
+          id={`${FormInputAddCardOwner.owner_name}`}
           label='Owner name'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputOwnerEnum.owner_name}`, {
+          {...register(`${FormInputAddCardOwner.owner_name}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,
@@ -48,11 +47,11 @@ export const OwnerCard = ({ formProgress, setFormProgress, register }: Props) =>
         />
         <TextField
           required
-          id={`${FormInputOwnerEnum.surname}`}
+          id={`${FormInputAddCardOwner.surname}`}
           label='Owner surname'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputOwnerEnum.surname}`, {
+          {...register(`${FormInputAddCardOwner.surname}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,
@@ -60,11 +59,11 @@ export const OwnerCard = ({ formProgress, setFormProgress, register }: Props) =>
         />
         <TextField
           required
-          id={`${FormInputOwnerEnum.city}`}
+          id={`${FormInputAddCardOwner.city}`}
           label='Owner city'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputOwnerEnum.city}`, {
+          {...register(`${FormInputAddCardOwner.city}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,
@@ -72,22 +71,22 @@ export const OwnerCard = ({ formProgress, setFormProgress, register }: Props) =>
         />
         <TextField
           required
-          id={`${FormInputOwnerEnum.age}`}
+          id={`${FormInputAddCardOwner.age}`}
           label='Owner age'
           type='number'
           variant='outlined'
           fullWidth
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*", min: 1, max: 99 }}
-          {...register(`${FormInputOwnerEnum.age}`)}
+          {...register(`${FormInputAddCardOwner.age}`)}
         />
 
         <TextField
           required
-          id={`${FormInputOwnerEnum.gender}`}
+          id={`${FormInputAddCardOwner.gender}`}
           label='Owner gender'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputOwnerEnum.gender}`, {
+          {...register(`${FormInputAddCardOwner.gender}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,

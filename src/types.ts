@@ -25,7 +25,7 @@ export type Car = {
   image_url: string
 }
 
-export enum FormInputOwnerEnum {
+export enum FormInputAddCardOwner {
   owner_name = "owner_name",
   surname = "surname",
   city = "city",
@@ -33,12 +33,12 @@ export enum FormInputOwnerEnum {
   gender = "gender",
 }
 
-export enum FormInputBrandEnum {
+export enum FormInputAddCardBrand {
   brand_name = "brand_name",
   brand_country = "brand_country",
 }
 
-export enum FormInputCarEnum {
+export enum FormInputAddCardCar {
   name = "name",
   country = "country",
   brand = "brand",

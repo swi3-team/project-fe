@@ -10,7 +10,7 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material"
-import { CarBodyType, FormInput, FormInputCarEnum } from "../../types"
+import { CarBodyType, FormInput, FormInputAddCardCar } from "../../types"
 import {
   SubmitHandler,
   UseFormHandleSubmit,
@@ -47,6 +47,18 @@ export const CarCard = ({
   const buttonPrevState = () => {
     setFormProgress(2)
   }
+
+  const commonButtonStyle = {
+    width: "100%",
+    mt: 1,
+    backgroundColor: "#303030",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#808080",
+      color: "white",
+    },
+  }
+
   return (
     <Box
       component='form'
@@ -60,11 +72,11 @@ export const CarCard = ({
       <Stack direction='column' gap={3}>
         <TextField
           required
-          id={`${FormInputCarEnum.name}`}
+          id={`${FormInputAddCardCar.name}`}
           label='Car name'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputCarEnum.name}`, {
+          {...register(`${FormInputAddCardCar.name}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,
@@ -72,23 +84,11 @@ export const CarCard = ({
         />
         <TextField
           required
-          id={`${FormInputCarEnum.country}`}
+          id={`${FormInputAddCardCar.country}`}
           label='Car country'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputCarEnum.country}`, {
-            required: true,
-            maxLength: 15,
-            pattern: /^[A-Za-z]+$/i,
-          })}
-        />
-        {/* <TextField
-          required
-          id={`${FormInputCarEnum.brand}`}
-          label='Car brand'
-          variant='outlined'
-          fullWidth
-          {...register(`${FormInputCarEnum.brand}`, {
+          {...register(`${FormInputAddCardCar.country}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,
@@ -96,32 +96,20 @@ export const CarCard = ({
         />
         <TextField
           required
-          id={`${FormInputCarEnum.owner}`}
-          label='Car owner'
-          variant='outlined'
-          fullWidth
-          {...register(`${FormInputCarEnum.owner}`, {
-            required: true,
-            maxLength: 15,
-            pattern: /^[A-Za-z]+$/i,
-          })}
-        /> */}
-        <TextField
-          required
-          id={`${FormInputCarEnum.year_made}`}
+          id={`${FormInputAddCardCar.year_made}`}
           type='number'
           label='Year made'
           variant='outlined'
           fullWidth
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*", min: 1980, max: 2023 }}
-          {...register(`${FormInputCarEnum.year_made}`)}
+          {...register(`${FormInputAddCardCar.year_made}`)}
         />
         <FormControl variant='outlined' fullWidth required>
           <InputLabel id='car-type-label'>Car type</InputLabel>
           <Select
             labelId='car-type-label'
             label='Car type'
-            id={`${FormInputCarEnum.type}`}
+            id={`${FormInputAddCardCar.type}`}
             value={type}
             onChange={handleChange}>
             <MenuItem value='Combi'>Combi</MenuItem>
@@ -133,11 +121,11 @@ export const CarCard = ({
 
         <TextField
           required
-          id={`${FormInputCarEnum.engine}`}
+          id={`${FormInputAddCardCar.engine}`}
           label='Car engine'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputCarEnum.engine}`, {
+          {...register(`${FormInputAddCardCar.engine}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,
@@ -146,11 +134,11 @@ export const CarCard = ({
 
         <TextField
           required
-          id={`${FormInputCarEnum.image_url}`}
+          id={`${FormInputAddCardCar.image_url}`}
           label='Car image url'
           variant='outlined'
           fullWidth
-          {...register(`${FormInputCarEnum.image_url}`, {
+          {...register(`${FormInputAddCardCar.image_url}`, {
             required: true,
             maxLength: 15,
             pattern: /^[A-Za-z]+$/i,
@@ -166,32 +154,10 @@ export const CarCard = ({
             size='small'
             type='button'
             onClick={() => buttonPrevState()}
-            sx={{
-              width: "100%",
-              mt: 1,
-              backgroundColor: "#303030",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "#808080",
-                color: "white",
-              },
-            }}>
+            sx={commonButtonStyle}>
             Prev step
           </Button>
-          <Button
-            variant='contained'
-            size='small'
-            type='submit'
-            sx={{
-              width: "100%",
-              mt: 1,
-              backgroundColor: "#303030",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "#808080",
-                color: "white",
-              },
-            }}>
+          <Button variant='contained' size='small' type='submit' sx={commonButtonStyle}>
             Add car
           </Button>
         </Stack>
