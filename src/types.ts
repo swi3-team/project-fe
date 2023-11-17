@@ -5,7 +5,7 @@ export type Brand = {
 }
 
 export type Owner = {
-  id: number
+  id?: number
   name: string
   surname: string
   city: string
