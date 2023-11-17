@@ -1,23 +1,14 @@
 import { Car } from "../types";
+import { BRAND_MOCK } from "./brand";
+import { OWNERS_MOCK } from "./owner";
 
 export const CARS_MOCK: Car[] = [
   {
     id: 1,
     name: "Car 1",
     country: "Country 1",
-    brand: {
-      id: 1,
-      name: "Brand 1",
-      country: "Brand Country 1",
-    },
-    owner: {
-      id: 1,
-      name: "Owner 1",
-      surname: "Owner Surname 1",
-      city: "Owner City 1",
-      age: 30,
-      gender: "Male",
-    },
+    brand: BRAND_MOCK[0],
+    owner: OWNERS_MOCK[0],
     year_made: 2020,
     type: "Sedan",
     engine: "Sedan",
@@ -28,19 +19,8 @@ export const CARS_MOCK: Car[] = [
     id: 2,
     name: "Car 2",
     country: "Country 2",
-    brand: {
-      id: 2,
-      name: "Brand 2",
-      country: "Brand Country 2",
-    },
-    owner: {
-      id: 2,
-      name: "Owner 2",
-      surname: "Owner Surname 2",
-      city: "Owner City 2",
-      age: 35,
-      gender: "Female",
-    },
+    brand: BRAND_MOCK[1],
+    owner: OWNERS_MOCK[1],
     year_made: 2019,
     type: "SUV",
     engine: "SUV",
@@ -51,19 +31,8 @@ export const CARS_MOCK: Car[] = [
     id: 3,
     name: "Car 3",
     country: "Country 3",
-    brand: {
-      id: 3,
-      name: "Brand 3",
-      country: "Brand Country 3",
-    },
-    owner: {
-      id: 3,
-      name: "Owner 3",
-      surname: "Owner Surname 3",
-      city: "Owner City 3",
-      age: 35,
-      gender: "Female",
-    },
+    brand: BRAND_MOCK[2],
+    owner: OWNERS_MOCK[2],
     year_made: 2019,
     type: "SUV",
     engine: "SUV",
