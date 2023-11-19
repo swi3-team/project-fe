@@ -1,36 +1,10 @@
-import { useEffect, useState } from "react"
-import { Button, Card, CardHeader, CardContent, Box, Typography } from "@mui/material"
+import { Button, Card, CardHeader, CardContent, Box } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace"
-import { OwnerCard } from "../components/common/owner-card"
-import { CarCard } from "../components/common/car-card"
-import { BrandCard } from "../components/common/brand-card"
-import { useForm } from "react-hook-form"
-import { FormInput } from "../types"
+import { CarAddForm } from "../components/car-add/car-add-form"
 
 export const CarAdd = () => {
   const navigate = useNavigate()
-  const { register, handleSubmit, setValue, watch } = useForm<FormInput>()
-
-  const [formProgress, setFormProgress] = useState(1)
-  const [formName, setFormName] = useState("Owner info")
-
-  useEffect(() => {
-    switch (formProgress) {
-      case 1:
-        setFormName("Owner info")
-        break
-      case 2:
-        setFormName("Brand info")
-        break
-      case 3:
-        setFormName("Car info")
-        break
-      default:
-        setFormName("Owner info")
-        break
-    }
-  }, [formProgress])
 
   const handleGoBackButtonClick = () => navigate("/")
 
@@ -38,7 +12,7 @@ export const CarAdd = () => {
     <Card>
       <CardHeader
         titleTypographyProps={{ fontWeight: "bold" }}
-        title='Add new card'
+        title='Add new car'
         action={
           <Button
             size='small'
@@ -50,7 +24,6 @@ export const CarAdd = () => {
         }
       />
       <CardContent>
-        <Typography>{formName}</Typography>
         <Box
           sx={{
             display: "flex",
@@ -58,24 +31,7 @@ export const CarAdd = () => {
             alignItems: "center",
             flexDirection: "row",
           }}>
-          <OwnerCard
-            formProgress={formProgress}
-            setFormProgress={setFormProgress}
-            register={register}
-          />
-          <BrandCard
-            formProgress={formProgress}
-            setFormProgress={setFormProgress}
-            register={register}
-          />
-          <CarCard
-            formProgress={formProgress}
-            setFormProgress={setFormProgress}
-            register={register}
-            handleSubmit={handleSubmit}
-            setValue={setValue}
-            watch={watch}
-          />
+          <CarAddForm />
         </Box>
       </CardContent>
     </Card>
