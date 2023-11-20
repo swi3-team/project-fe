@@ -19,6 +19,19 @@ export const CarAddForm = () => {
     type: Yup.string().required("Required"),
     engine: Yup.string().required("Required"),
     image_url: Yup.string().required("Required"),
+    owner: Yup.object().shape({
+      id: Yup.number().required("Required"),
+      name: Yup.string().required("Required"),
+      surname: Yup.string().required("Required"),
+      city: Yup.string().required("Required"),
+      age: Yup.number().required("Required"),
+      gender: Yup.string().required("Required"),
+    }),
+    brand: Yup.object().shape({
+      id: Yup.number().required("Required"),
+      name: Yup.string().required("Required"),
+      country: Yup.string().required("Required"),
+    }),
   })
 
   const methods = useForm({
@@ -30,6 +43,19 @@ export const CarAddForm = () => {
       type: "",
       engine: "",
       image_url: "",
+      owner: {
+        id: 1,
+        name: "",
+        surname: "",
+        city: "",
+        age: 0,
+        gender: "",
+      },
+      brand: {
+        id: 1,
+        name: "",
+        country: "",
+      },
     },
   })
 
@@ -55,6 +81,7 @@ export const CarAddForm = () => {
           getOptionLabel={(option: Owner | string) =>
             typeof option === "string" ? option : `${option.name} ${option.surname}`
           }
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           name='owner'
           placeholder='Owner'
           options={OWNERS_MOCK}
@@ -64,6 +91,7 @@ export const CarAddForm = () => {
           getOptionLabel={(option: Brand | string) =>
             typeof option === "string" ? option : `${option.name}`
           }
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           name='brand'
           placeholder='Brand'
           options={BRAND_MOCK}
