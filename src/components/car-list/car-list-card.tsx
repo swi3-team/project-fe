@@ -28,6 +28,8 @@ interface Props {
 }
 
 export const CarListCard = ({ car }: Props) => {
+  console.log("car", car);
+
   const { id, name, image_url, brand, owner, type, engine, year_made } = car;
 
   const navigate = useNavigate();
