@@ -12,41 +12,35 @@ import {
   ListItemText,
   Stack,
   Typography,
-} from "@mui/material";
-import { Car } from "../../types";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CarCrashIcon from "@mui/icons-material/CarCrash";
-import PropaneTankIcon from "@mui/icons-material/PropaneTank";
-import PersonIcon from "@mui/icons-material/Person";
-import TodayIcon from "@mui/icons-material/Today";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import { useNavigate, generatePath } from "react-router-dom";
+} from '@mui/material';
+import { Car } from '../../types';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CarCrashIcon from '@mui/icons-material/CarCrash';
+import PropaneTankIcon from '@mui/icons-material/PropaneTank';
+import PersonIcon from '@mui/icons-material/Person';
+import TodayIcon from '@mui/icons-material/Today';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { useNavigate, generatePath } from 'react-router-dom';
 
 interface Props {
   car: Car;
 }
 
 export const CarListCard = ({ car }: Props) => {
-  console.log("car", car);
+  console.log('car', car);
 
   const { id, name, image_url, brand, owner, type, engine, year_made } = car;
 
   const navigate = useNavigate();
 
-  const handleDetailClick = () =>
-    navigate(generatePath("/update/:id", { id: String(id) }));
+  const handleDetailClick = () => navigate(generatePath('/update/:id', { id: String(id) }));
 
-  const handleDeleteClick = () => console.log("TODO: delete car"); // TODO: implement delete car
+  const handleDeleteClick = () => console.log('TODO: delete car'); // TODO: implement delete car
 
   return (
     <Card>
-      <CardMedia
-        component="img"
-        height="130"
-        image={image_url}
-        alt="Paella dish"
-      />
+      <CardMedia component="img" height="130" image={image_url} alt="Paella dish" />
 
       <CardContent>
         <Typography gutterBottom variant="h4" component="div" fontWeight="bold">
@@ -55,11 +49,7 @@ export const CarListCard = ({ car }: Props) => {
 
         <Divider />
 
-        <List
-          component={Stack}
-          direction="row"
-          sx={{ width: "100%", bgcolor: "background.paper" }}
-        >
+        <List component={Stack} direction="row" sx={{ width: '100%', bgcolor: 'background.paper' }}>
           <ListItem>
             <ListItemAvatar>
               <Avatar>
@@ -75,10 +65,7 @@ export const CarListCard = ({ car }: Props) => {
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText
-              primary="owner"
-              secondary={`${owner.name} ${owner.surname}`}
-            />
+            <ListItemText primary="owner" secondary={`${owner.name} ${owner.surname}`} />
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -108,7 +95,7 @@ export const CarListCard = ({ car }: Props) => {
       </CardContent>
 
       <CardActions>
-        <Stack direction="row" gap={1} sx={{ ml: "auto" }}>
+        <Stack direction="row" gap={1} sx={{ ml: 'auto' }}>
           <Button
             aria-label="update"
             variant="outlined"
