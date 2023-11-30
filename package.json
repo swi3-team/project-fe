@@ -1,28 +1,59 @@
 {
   "name": "vite-project",
   "private": true,
+  "homepage": "https://swi3-team.github.io/cars-admin",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "postinstall": "husky install",
     "build": "tsc && vite build",
+    "format": "prettier --write src/**/*.{ts,tsx}",
+    "deploy": "gh-pages -d build",
+    "lint:fix": "yarn run lint --fix",
+    "test": "vitest",
+    "lint-staged": "lint-staged",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.3.2",
+    "@mui/icons-material": "^5.14.14",
+    "@mui/material": "^5.14.14",
+    "axios": "^1.6.2",
+    "gh-pages": "^6.0.0",
+    "path": "^0.12.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.47.0",
+    "react-router-dom": "^6.17.0",
+    "yup": "^1.3.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.2",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
     "eslint": "^8.45.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "husky": "^8.0.3",
+    "jsdom": "^23.0.1",
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vitest": "^0.34.6"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "yarn lint:fix",
+    "*.{ts,tsx,css,md,html,json}": "yarn prettier --write src/**/*.{ts,tsx}"
   }
 }
