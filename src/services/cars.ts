@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { API_URL } from "./constants";
-import { Car } from "../types";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from './constants';
+import { Car } from '../types';
 
 const useGetCars = () => {
   const [data, setData] = useState<Car[]>([]);
@@ -12,7 +12,7 @@ const useGetCars = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(API_URL + "/cars/all");
+        const response = await axios.get(API_URL + '/cars/all');
         setData(response.data);
       } catch (error: unknown) {
         setError(error as Error);

@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
 
-declare module "@mui/material/styles" {
+declare module '@mui/material/styles' {
   interface Theme {
     status: {
       danger: string;
@@ -17,19 +17,19 @@ declare module "@mui/material/styles" {
 export const theme = createTheme({
   typography: {
     fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
+      '-apple-system',
+      'BlinkMacSystemFont',
       '"Segoe UI"',
-      "Roboto",
+      'Roboto',
       '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
+      'Arial',
+      'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(","),
+    ].join(','),
   },
   palette: {
-    mode: "light",
+    mode: 'light',
   },
 });

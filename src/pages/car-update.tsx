@@ -1,9 +1,9 @@
-import { Button, Card, CardHeader } from "@mui/material";
-import { useParams, useNavigate } from "react-router-dom";
-import { CARS_MOCK } from "../_mock/car";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { CarDetailCard } from "../components/car-update/car-detail-card";
-import { Car } from "../types";
+import { Button, Card, CardHeader } from '@mui/material';
+import { useParams, useNavigate } from 'react-router-dom';
+import { CARS_MOCK } from '../_mock/car';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { CarDetailCard } from '../components/car-update/car-detail-card';
+import { Car } from '../types';
 
 export const CardUpdate = () => {
   const { id } = useParams();
@@ -15,12 +15,12 @@ export const CardUpdate = () => {
 
   const { name } = data ?? {};
 
-  const handleGoBackButtonClick = () => navigate("/");
+  const handleGoBackButtonClick = () => navigate('/');
 
   return (
     <Card>
       <CardHeader
-        titleTypographyProps={{ fontWeight: "bold" }}
+        titleTypographyProps={{ fontWeight: 'bold' }}
         title={name}
         action={
           <Button
@@ -33,7 +33,7 @@ export const CardUpdate = () => {
           </Button>
         }
       />
-      <CarDetailCard defaultValues={data as Car}/>
+      <CarDetailCard defaultValues={data as Car} />
     </Card>
   );
 };

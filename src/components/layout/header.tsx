@@ -1,13 +1,13 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography } from '@mui/material';
 
 export const Header = () => (
   <Stack
     sx={{
-      bgcolor: "background.default",
+      bgcolor: 'background.default',
       p: 2,
-      border: "2px solid #000",
+      border: '2px solid #000',
       borderRadius: 2,
-      textAlign: "center",
+      textAlign: 'center',
       mb: 2,
     }}
   >
