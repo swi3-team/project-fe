@@ -12,7 +12,7 @@ export const useGetBrands = () => {
     const getBrands = async () => {
       setIsLoading(true)
       try {
-        const response = await axios.get(`${API_URL}/cars/brands/all`)
+        const response = await axios.get(`${API_URL}/cars/brands`)
         setData(response.data)
       } catch (error: unknown) {
         setError(error as Error)

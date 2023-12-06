@@ -12,7 +12,8 @@ export const useGetOwners = () => {
     const getOwners = async () => {
       setIsLoading(true)
       try {
-        const response = await axios.get(`${API_URL}/cars/owners/all`)
+        const response = await axios.get(`${API_URL}/cars/owners`)
+        console.log("response: ", response)
         setData(response.data)
       } catch (error: unknown) {
         setError(error as Error)

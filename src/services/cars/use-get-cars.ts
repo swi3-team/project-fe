@@ -12,7 +12,7 @@ const useGetCars = () => {
     const fetchData = async () => {
       setIsLoading(true)
       try {
-        const response = await axios.get(API_URL + "/cars/all")
+        const response = await axios.get(API_URL + "/cars/")
         setData(response.data)
       } catch (error: unknown) {
         setError(error as Error)

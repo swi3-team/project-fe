@@ -10,7 +10,7 @@ export const useUpdateCar = (id: string, updatedCarData: Car) => {
   const updateCar = async () => {
     setIsUpdating(true)
     try {
-      await axios.put(`${API_URL}/cars/edit/${id}`, updatedCarData)
+      await axios.put(`${API_URL}/cars/${id}`, updatedCarData)
     } catch (error: unknown) {
       setError(error as Error)
     } finally {
