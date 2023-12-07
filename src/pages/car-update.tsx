@@ -1,27 +1,39 @@
-import { Button, Card, CardHeader } from '@mui/material';
+import { Box, Button, Card, CardHeader, LinearProgress } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
-import { CARS_MOCK } from '../_mock/car';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { CarDetailCard } from '../components/car-update/car-detail-card';
 import { Car } from '../types';
+import { useGetCar } from '../services/cars/use-get-car';
+import { useUpdateCar } from '../services/cars/use-update-car';
 
 export const CardUpdate = () => {
   const { id } = useParams();
 
+  console.log('id', id);
+
   const navigate = useNavigate();
 
-  // TODO: add API call
-  const data = CARS_MOCK.find((card) => card.id === Number(id));
+  const { data, isLoading } = useGetCar(id as string);
 
-  const { name } = data ?? {};
+  const { updateCar } = useUpdateCar();
 
   const handleGoBackButtonClick = () => navigate('/');
 
-  return (
+  const handleUpdateCar = async (car: Car) => {
+    await updateCar({ ...car, id, brand_id: car.brand.id!, owner_id: car.owner.id! });
+
+    navigate('/');
+  };
+
+  return isLoading ? (
+    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <LinearProgress />
+    </Box>
+  ) : (
     <Card>
       <CardHeader
         titleTypographyProps={{ fontWeight: 'bold' }}
-        title={name}
+        // title={name}
         action={
           <Button
             size="small"
@@ -33,7 +45,7 @@ export const CardUpdate = () => {
           </Button>
         }
       />
-      <CarDetailCard defaultValues={data as Car} />
+      {data && <CarDetailCard defaultValues={data as Car} updateCar={handleUpdateCar} />}
     </Card>
   );
 };

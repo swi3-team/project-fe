@@ -1,17 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import FormProvider from '../common/form-provider';
 import { Stack, Button } from '@mui/material';
-import { BRAND_MOCK } from '../../_mock/brand';
 import RHFTextField from '../common/rhf-text-field';
 import RHFAutocomplete from '../common/rhf-autocomplete';
-import { Brand, Car, Owner } from '../../types';
-import { OWNERS_MOCK } from '../../_mock/owner';
+import { Car } from '../../types';
+import { useCreateCar } from '../../services/cars/use-create-car';
+import { useGetBrands } from '../../services/brand/use-get-brands';
+import { useGetOwners } from '../../services/owner/use-get-owners';
+import { useNavigate } from 'react-router-dom';
 
 type FormValuesProps = Omit<Car, 'id'>;
 
 export const CarAddForm = () => {
+  const navigate = useNavigate();
+
+  const { createCar } = useCreateCar();
+
+  const { data: brandsData, isLoading: brandsIsLoading } = useGetBrands();
+
+  const { data: ownersData, isLoading: ownersIsLoading } = useGetOwners();
+
   const CarAddSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
     country: Yup.string().required('Required'),
@@ -19,19 +30,8 @@ export const CarAddForm = () => {
     type: Yup.string().required('Required'),
     engine: Yup.string().required('Required'),
     image_url: Yup.string().required('Required'),
-    owner: Yup.object().shape({
-      id: Yup.number().required('Required'),
-      name: Yup.string().required('Required'),
-      surname: Yup.string().required('Required'),
-      city: Yup.string().required('Required'),
-      age: Yup.number().required('Required'),
-      gender: Yup.string().required('Required'),
-    }),
-    brand: Yup.object().shape({
-      id: Yup.number().required('Required'),
-      name: Yup.string().required('Required'),
-      country: Yup.string().required('Required'),
-    }),
+    owner: Yup.string().required('Required'),
+    brand: Yup.string().required('Required'),
   });
 
   const methods = useForm({
@@ -43,31 +43,20 @@ export const CarAddForm = () => {
       type: '',
       engine: '',
       image_url: '',
-      owner: {
-        id: 1,
-        name: '',
-        surname: '',
-        city: '',
-        age: 0,
-        gender: '',
-      },
-      brand: {
-        id: 1,
-        name: '',
-        country: '',
-      },
+      owner: '',
+      brand: '',
     },
   });
 
   const { handleSubmit } = methods;
 
-  // missing connection on API
-  const onSubmit = (values: FormValuesProps) => {
-    console.log('values: ', values);
+  const onSubmit = async (values: FormValuesProps) => {
+    await createCar({ ...values, brand_id: values.brand!, owner_id: values.owner! });
+
+    navigate('/');
   };
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit as any)}>
       <Stack spacing={2} gap={1}>
         <RHFTextField name="name" label="Name" />
@@ -77,41 +66,34 @@ export const CarAddForm = () => {
         <RHFTextField name="engine" label="Engine" />
         <RHFTextField name="image_url" label="Image URL" />
 
-        <RHFAutocomplete
-          getOptionLabel={(option: Owner | string) =>
-            typeof option === 'string' ? option : `${option.name} ${option.surname}`
-          }
-          isOptionEqualToValue={(option, value) => option.id === value.id}
-          name="owner"
-          placeholder="Owner"
-          options={OWNERS_MOCK}
-        />
+        {!ownersIsLoading && (
+          <RHFAutocomplete
+            getOptionLabel={(option: string) =>
+              ownersData
+                .filter(({ id }) => String(id) === option)
+                .map(({ name, surname }) => `${name} ${surname}`)[0] ?? ''
+            }
+            // isOptionEqualToValue={(option, value) => option.id === value.id}
+            name="owner"
+            placeholder="Owner"
+            options={ownersData.map(({ id }) => String(id))}
+          />
+        )}
 
-        <RHFAutocomplete
-          getOptionLabel={(option: Brand | string) =>
-            typeof option === 'string' ? option : `${option.name}`
-          }
-          isOptionEqualToValue={(option, value) => option.id === value.id}
-          name="brand"
-          placeholder="Brand"
-          options={BRAND_MOCK}
-        />
+        {!brandsIsLoading && (
+          <RHFAutocomplete
+            getOptionLabel={(option: string) =>
+              brandsData.find(({ id }) => String(id) === option)?.name || ''
+            }
+            // isOptionEqualToValue={(option, value) => option.id === value.id}
+            name="brand"
+            placeholder="Brand"
+            options={brandsData.map(({ id }) => String(id))}
+          />
+        )}
 
-        <Button
-          variant="contained"
-          size="small"
-          type="submit"
-          sx={{
-            mt: 1,
-            backgroundColor: '#303030',
-            color: 'white',
-            '&:hover': {
-              backgroundColor: '#808080',
-              color: 'white',
-            },
-          }}
-        >
-          Add car
+        <Button type="submit" variant="contained">
+          Submit
         </Button>
       </Stack>
     </FormProvider>

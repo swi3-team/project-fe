@@ -1,5 +1,5 @@
 export type Brand = {
-  id: number;
+  id?: number;
   name: string;
   country: string;
 };
@@ -8,9 +8,9 @@ export type Owner = {
   id?: number;
   name: string;
   surname: string;
-  city: string;
-  age: number;
-  gender: string;
+  city?: string;
+  age?: number;
+  gender?: string;
 };
 
 export type Car = {
