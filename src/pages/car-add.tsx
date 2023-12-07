@@ -1,24 +1,25 @@
-import { Button, Card, CardHeader, CardContent, Box } from "@mui/material"
-import { useNavigate } from "react-router-dom"
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace"
-import { CarAddForm } from "../components/car-add/car-add-form"
+import { Button, Card, CardHeader, CardContent, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { CarAddForm } from '../components/car-add/car-add-form';
 
 export const CarAdd = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleGoBackButtonClick = () => navigate("/")
+  const handleGoBackButtonClick = () => navigate('/');
 
   return (
     <Card>
       <CardHeader
-        titleTypographyProps={{ fontWeight: "bold" }}
-        title='Add new car'
+        titleTypographyProps={{ fontWeight: 'bold' }}
+        title="Add new car"
         action={
           <Button
-            size='small'
-            variant='outlined'
+            size="small"
+            variant="outlined"
             onClick={handleGoBackButtonClick}
-            startIcon={<KeyboardBackspaceIcon />}>
+            startIcon={<KeyboardBackspaceIcon />}
+          >
             Go back
           </Button>
         }
@@ -26,14 +27,15 @@ export const CarAdd = () => {
       <CardContent>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-          }}>
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}
+        >
           <CarAddForm />
         </Box>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
