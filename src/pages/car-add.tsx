@@ -1,4 +1,4 @@
-import { Button, Card, CardHeader, CardContent, Box } from '@mui/material';
+import { Button, Card, CardHeader, CardContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { CarAddForm } from '../components/car-add/car-add-form';
@@ -25,16 +25,7 @@ export const CarAdd = () => {
         }
       />
       <CardContent>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'row',
-          }}
-        >
-          <CarAddForm />
-        </Box>
+        <CarAddForm />
       </CardContent>
     </Card>
   );

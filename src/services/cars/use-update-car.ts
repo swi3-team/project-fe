@@ -1,22 +1,22 @@
-import { useState } from "react"
-import axios from "axios"
-import { Car } from "../../types"
-import { API_URL } from "../constants"
+import { useState } from 'react';
+import axios from 'axios';
+import { API_URL } from '../constants';
 
-export const useUpdateCar = (id: string, updatedCarData: Car) => {
-  const [isUpdating, setIsUpdating] = useState<boolean>(false)
-  const [error, setError] = useState<Error>()
+export const useUpdateCar = () => {
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const [error, setError] = useState<Error>();
 
-  const updateCar = async () => {
-    setIsUpdating(true)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updateCar = async (c: any) => {
+    setIsUpdating(true);
     try {
-      await axios.put(`${API_URL}/cars/${id}`, updatedCarData)
+      await axios.put(`${API_URL}/cars/${c.id}`, c);
     } catch (error: unknown) {
-      setError(error as Error)
+      setError(error as Error);
     } finally {
-      setIsUpdating(false)
+      setIsUpdating(false);
     }
-  }
+  };
 
-  return { isUpdating, error, updateCar }
-}
+  return { isUpdating, error, updateCar };
+};

@@ -25,22 +25,32 @@ import { useNavigate, generatePath } from 'react-router-dom';
 
 interface Props {
   car: Car;
+  handleDeleteCar: (id: string) => void;
 }
 
-export const CarListCard = ({ car }: Props) => {
-  console.log('car', car);
-
+export const CarListCard = ({ car, handleDeleteCar }: Props) => {
   const { id, name, image_url, brand, owner, type, engine, year_made } = car;
 
   const navigate = useNavigate();
 
   const handleDetailClick = () => navigate(generatePath('/update/:id', { id: String(id) }));
 
-  const handleDeleteClick = () => console.log('TODO: delete car'); // TODO: implement delete car
+  const handleDeleteClick = () => handleDeleteCar(String(id));
+
+  const getImageUrl = (imageUrl: string) => {
+    try {
+      let content = decodeURI(imageUrl);
+      content = content.toString().replace(/~~pct~~/g, '%');
+
+      return content;
+    } catch (e) {
+      console.warn('error', e);
+    }
+  };
 
   return (
     <Card>
-      <CardMedia component="img" height="130" image={image_url} alt="Paella dish" />
+      <CardMedia component="img" height="130" image={getImageUrl(image_url)} alt="Paella dish" />
 
       <CardContent>
         <Typography gutterBottom variant="h4" component="div" fontWeight="bold">

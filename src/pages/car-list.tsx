@@ -1,26 +1,32 @@
-import { Button, Stack } from '@mui/material';
+import { Box, Button, LinearProgress, Stack } from '@mui/material';
 import { CarListCard } from '../components/car-list/car-list-card';
 import AddIcon from '@mui/icons-material/Add';
 import { generatePath, useNavigate } from 'react-router-dom';
 import useGetCars from '../services/cars/use-get-cars';
+import { useDeleteCar } from '../services/cars/use-delete-car';
 
 export const CarList = () => {
-  // const data = CARS_MOCK; // TODO: demock
-  const { data, isLoading } = useGetCars();
+  const { data, isLoading, refetch } = useGetCars();
+
+  const { deleteCar } = useDeleteCar();
 
   const navigate = useNavigate();
 
   const handleAddCarButtonClick = () => navigate(generatePath('/add'));
 
-  console.log('cars', data);
+  const handleDeleteClick = async (id: string) => {
+    await deleteCar(String(id));
+
+    refetch();
+  };
 
   return isLoading ? (
-    <div>loading ... </div>
+    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <LinearProgress />
+    </Box>
   ) : (
     <Stack gap={2}>
       <Stack>
-        {/* TODO: implement filters */}
-
         <Button
           sx={{ ml: 'auto' }}
           variant="contained"
@@ -33,7 +39,7 @@ export const CarList = () => {
 
       <Stack gap={2}>
         {data.map((car) => (
-          <CarListCard car={car} key={car.id} />
+          <CarListCard car={car} key={car.id} handleDeleteCar={handleDeleteClick} />
         ))}
       </Stack>
     </Stack>

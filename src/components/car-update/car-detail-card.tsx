@@ -6,16 +6,17 @@ import { Brand, Car, Owner } from '../../types';
 import FormProvider from '../common/form-provider';
 import { Button, Stack } from '@mui/material';
 import RHFAutocomplete from '../common/rhf-autocomplete';
-import { OWNERS_MOCK } from '../../_mock/owner';
-import { BRAND_MOCK } from '../../_mock/brand';
+import { useGetBrands } from '../../services/brand/use-get-brands';
+import { useGetOwners } from '../../services/owner/use-get-owners';
 
 type FormValuesProps = Omit<Car, 'id'>;
 
 interface Props {
   defaultValues: FormValuesProps;
+  updateCar: (car: Car) => void;
 }
 
-export const CarDetailCard = ({ defaultValues }: Props) => {
+export const CarDetailCard = ({ defaultValues, updateCar }: Props) => {
   const RenameMatchSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
     country: Yup.string().required('Required'),
@@ -25,6 +26,10 @@ export const CarDetailCard = ({ defaultValues }: Props) => {
     image_url: Yup.string().required('Required'),
   });
 
+  const { data: brandsData } = useGetBrands();
+
+  const { data: ownersData } = useGetOwners();
+
   const methods = useForm({
     resolver: yupResolver(RenameMatchSchema),
     defaultValues,
@@ -33,8 +38,7 @@ export const CarDetailCard = ({ defaultValues }: Props) => {
   const { handleSubmit } = methods;
 
   const onSubmit = (values: FormValuesProps) => {
-    // TODO: connect to API
-    console.log('values', values);
+    updateCar(values as Car);
   };
 
   return (
@@ -54,7 +58,7 @@ export const CarDetailCard = ({ defaultValues }: Props) => {
           }
           name="owner"
           placeholder="Owner"
-          options={OWNERS_MOCK}
+          options={ownersData}
         />
 
         <RHFAutocomplete
@@ -63,7 +67,7 @@ export const CarDetailCard = ({ defaultValues }: Props) => {
           }
           name="brand"
           placeholder="Brand"
-          options={BRAND_MOCK}
+          options={brandsData}
           value={defaultValues.brand.name}
         />
 
