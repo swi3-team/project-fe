@@ -1,17 +1,26 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import FormProvider from '../common/form-provider';
 import { Stack, Button } from '@mui/material';
-import { BRAND_MOCK } from '../../_mock/brand';
 import RHFTextField from '../common/rhf-text-field';
 import RHFAutocomplete from '../common/rhf-autocomplete';
 import { Brand, Car, Owner } from '../../types';
-import { OWNERS_MOCK } from '../../_mock/owner';
+import { useCreateCar } from '../../services/cars/use-create-car';
+import { useGetBrands } from '../../services/brand/use-get-brands';
+import { useGetOwners } from '../../services/owner/use-get-owners';
+// import { useState } from "react"
 
 type FormValuesProps = Omit<Car, 'id'>;
 
 export const CarAddForm = () => {
+  // const [owners, setOwners] = useState<Owner | null>(null)
+  // const [ownersInput, setOwnersInput] = useState<string>("")
+
+  // const [brands, setBrands] = useState<Brand | null>(null)
+  // const [brandsInput, setBrandsInput] = useState<string>("")
+
   const CarAddSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
     country: Yup.string().required('Required'),
@@ -44,7 +53,6 @@ export const CarAddForm = () => {
       engine: '',
       image_url: '',
       owner: {
-        id: 1,
         name: '',
         surname: '',
         city: '',
@@ -52,7 +60,6 @@ export const CarAddForm = () => {
         gender: '',
       },
       brand: {
-        id: 1,
         name: '',
         country: '',
       },
@@ -61,13 +68,21 @@ export const CarAddForm = () => {
 
   const { handleSubmit } = methods;
 
+  const { createCar } = useCreateCar();
+  const { data: brandsData } = useGetBrands();
+  const { data: ownersData } = useGetOwners();
+
+  console.log('brands data: ', brandsData);
+  console.log('ownersdata: ', ownersData);
+
   // missing connection on API
   const onSubmit = (values: FormValuesProps) => {
     console.log('values: ', values);
+    createCar(values);
   };
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit as any)}>
       <Stack spacing={2} gap={1}>
         <RHFTextField name="name" label="Name" />
@@ -84,7 +99,19 @@ export const CarAddForm = () => {
           isOptionEqualToValue={(option, value) => option.id === value.id}
           name="owner"
           placeholder="Owner"
-          options={OWNERS_MOCK}
+          options={ownersData}
+          // onChange={(_, value) => {
+          //   if (typeof value === "object" && value !== null) {
+          //     setOwners(value as Owner)
+          //   } else {
+          //     setOwners(null)
+          //   }
+          // }}
+          // value={owners}
+          // inputValue={ownersInput}
+          // onInputChange={(_, value) => {
+          //   setOwnersInput(value)
+          // }}
         />
 
         <RHFAutocomplete
@@ -94,7 +121,19 @@ export const CarAddForm = () => {
           isOptionEqualToValue={(option, value) => option.id === value.id}
           name="brand"
           placeholder="Brand"
-          options={BRAND_MOCK}
+          options={brandsData}
+          // value={brands}
+          // onChange={(_, value) => {
+          //   if (typeof value === "object" && value !== null) {
+          //     setBrands(value as Brand)
+          //   } else {
+          //     setBrands(null)
+          //   }
+          // }}
+          // inputValue={brandsInput}
+          // onInputChange={(_, value) => {
+          //   setBrandsInput(value)
+          // }}
         />
 
         <Button

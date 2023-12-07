@@ -2,7 +2,7 @@ import { Button, Stack } from '@mui/material';
 import { CarListCard } from '../components/car-list/car-list-card';
 import AddIcon from '@mui/icons-material/Add';
 import { generatePath, useNavigate } from 'react-router-dom';
-import useGetCars from '../services/cars';
+import useGetCars from '../services/cars/use-get-cars';
 
 export const CarList = () => {
   // const data = CARS_MOCK; // TODO: demock
