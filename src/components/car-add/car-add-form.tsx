@@ -20,7 +20,6 @@ export const CarAddForm = () => {
   const { createCar } = useCreateCar();
 
   const { data: brandsData, isLoading: brandsIsLoading } = useGetBrands();
-
   const { data: ownersData, isLoading: ownersIsLoading } = useGetOwners();
 
   const CarAddSchema = Yup.object().shape({
