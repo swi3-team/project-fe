@@ -11,6 +11,7 @@ export const useGetCar = (id: string) => {
   useEffect(() => {
     const fetchCar = async () => {
       setIsLoading(true);
+
       try {
         const response = await axios.get(`${API_URL}/cars/${id}`);
 

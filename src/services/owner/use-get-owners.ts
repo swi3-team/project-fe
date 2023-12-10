@@ -11,6 +11,7 @@ export const useGetOwners = () => {
   useEffect(() => {
     const getOwners = async () => {
       setIsLoading(true);
+
       try {
         const response = await axios.get(`${API_URL}/cars/owners`);
         setData(response.data);

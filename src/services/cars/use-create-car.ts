@@ -9,6 +9,7 @@ export const useCreateCar = () => {
 
   const createCar = async (c: any) => {
     setIsLoading(true);
+
     try {
       await axios.post(`${API_URL}/cars/`, c);
     } catch (error: unknown) {

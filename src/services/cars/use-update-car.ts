@@ -9,6 +9,7 @@ export const useUpdateCar = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateCar = async (c: any) => {
     setIsUpdating(true);
+
     try {
       await axios.put(`${API_URL}/cars/${c.id}`, c);
     } catch (error: unknown) {

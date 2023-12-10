@@ -9,6 +9,7 @@ export const useGetOwner = (id: string) => {
 
   const getOwner = async () => {
     setIsLoading(true);
+
     try {
       const response = await fetch(`${API_URL}/cars/owners/${id}`);
       const json = await response.json();

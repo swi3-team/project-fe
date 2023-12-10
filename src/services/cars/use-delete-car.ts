@@ -8,6 +8,7 @@ export const useDeleteCar = () => {
 
   const deleteCar = async (id: string) => {
     setIsDeleting(true);
+
     try {
       await axios.delete(`${API_URL}/cars/${id}`);
     } catch (error: unknown) {
