@@ -4,19 +4,19 @@ import axios from 'axios';
 import { API_URL } from '../constants';
 
 export const useCreateCar = () => {
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>();
 
   const createCar = async (c: any) => {
-    setIsSubmitting(true);
+    setIsLoading(true);
     try {
       await axios.post(`${API_URL}/cars/`, c);
     } catch (error: unknown) {
       setError(error as Error);
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
-  return { isSubmitting, error, createCar };
+  return { isLoading, error, createCar };
 };
